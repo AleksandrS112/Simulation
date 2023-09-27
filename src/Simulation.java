@@ -11,4 +11,26 @@
  *     pauseSimulation() - приостановить бесконечный цикл симуляции и рендеринга
  */
 public class Simulation {
+        Map map;
+        private int moveCount;
+        private String displayMap;
+        private Action action;
+
+        public Simulation() {
+                this.map = new Map();
+                this.action = new Action(this.map);
+        }
+
+        void nextTurn() {
+
+        }
+
+        void startSimulation() {
+
+        }
+
+        void pauseSimulation() {
+
+        }
+
 }

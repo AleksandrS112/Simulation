@@ -1,3 +1,6 @@
+import entity.Entity;
+import entity.creature.Predator;
+
 /**
  *  Action - действие, совершаемое над миром. Например - сходить всеми существами.
  *  Это действие итерировало бы существ и вызывало каждому makeMove().
@@ -9,4 +12,16 @@
  *     если их осталось слишком мало
  */
 public class Action {
+
+    public Action(Map map) {
+        for (int i=0; i<map.MAX_HEIGHT; i++) {
+            for (int j=0; j<map.MAX_LENGTH; j++) {
+                Predator en1 = new Predator();
+                map.matrix[i][j] = en1;
+            }
+        }
+    }
+    void prepareMap(Map map) {
+
+    }
 }

@@ -1,4 +1,4 @@
-package Entity;
+package entity.creature;
 
 /**
  * Класс "Хищник", наследуется от "Существа".
@@ -13,4 +13,8 @@ public class Predator extends Creature {
     private int аttackPower;
     private int аttackRange;
 
+
+    public Predator() {
+        this.image = "\uD83D\uDC2F";
+    }
 }

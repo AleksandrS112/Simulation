@@ -1,4 +1,6 @@
-package Entity;
+package entity.creature;
+
+import entity.Entity;
 
 /**
  * Абстрактный класс "Существо" наследуется от корневого абстрактного класа, имеет:

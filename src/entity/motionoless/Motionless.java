@@ -1,4 +1,6 @@
-package Entity;
+package entity.motionoless;
+
+import entity.Entity;
 
 /**
  * Класс "НеподвижныйОбъект" наследуется от корневого абстрактного класа

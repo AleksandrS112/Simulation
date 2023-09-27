@@ -1,4 +1,6 @@
-package Entity;
+package entity.motionoless;
+
+import entity.motionoless.Motionless;
 
 /**
  * Класс "Трава" (ресурс для травоядных) наследуется от класса неподвижных объектов
