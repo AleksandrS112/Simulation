@@ -1,31 +1,32 @@
 import entity.Entity;
+
 /**
  * Карта, содержит в себе коллекцию для хранения существ и их расположения.
  */
+
 public class Map {
 
-    static final int MAX_LENGTH = 30;
-    static final int MAX_HEIGHT = 8;
-    public Entity[][] matrix;
+    private static final int LENGTH = 30;   //- максимальная длина
+    private static final int HEIGHT = 8;    //- максимальная высота
+    private Entity[][] matrixMap;           //- двумерный массив из объектов (сущностей)
 
     public Map () {
-        Entity[][] matrix = new Entity[MAX_HEIGHT][MAX_LENGTH];
-        this.matrix = matrix;
+        this.matrixMap = new Entity[HEIGHT][LENGTH];
     }
 
     public Entity getEntity(int x, int y) {
-        return this.matrix[y][x];
+        return this.matrixMap[y][x];
     }
     public void setEntity(int x, int y, Entity entity) {
-        this.matrix[y][x] = entity;
+        this.matrixMap[y][x] = entity;
     }
 
-    public String prepareMapDisplay() {
+    public String prepareMapDisplay() {         //подготовить отображение карты
         String displayMap = "";
-        for (int i = 0; i<this.MAX_HEIGHT; i++) {
-            for (int j = 0; j<this.MAX_LENGTH; j++) {
-                if (this.matrix[i][j] != null)
-                    displayMap += this.matrix[i][j].getImage() + " ";
+        for (int i = 0; i<this.HEIGHT; i++) {
+            for (int j = 0; j<this.LENGTH; j++) {
+                if (this.matrixMap[i][j] != null)
+                    displayMap += this.matrixMap[i][j].getImage() + " ";
                 else
                     System.out.print("  ");
             }

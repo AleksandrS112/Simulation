@@ -11,6 +11,7 @@ import entity.creature.Predator;
  *   - turnActions - действия, совершаемые каждый ход. Примеры - передвижение существ, добавить травы или травоядных,
  *     если их осталось слишком мало
  */
+
 public class Action {
 
     public Action(Map map) {
@@ -21,7 +22,13 @@ public class Action {
             }
         }
     }
-    void prepareMap(Map map) {
 
+    public void fillMap (Map map) {
+        for (int i=0; i<2 ; i++) {
+            boolean is
+        }
+        //поставить существ
+        //поставить камни
     }
+
 }

@@ -14,4 +14,12 @@ public abstract class Creature extends Entity {
     private int healthPoints;
     private int speed;
     private int hunger;
+
+    protected Creature(int healthPoints, int speed, int hunger, String image) {
+        super(image);
+        this.healthPoints = healthPoints;
+        this.speed = speed;
+        this.hunger = hunger;
+    }
+
 }

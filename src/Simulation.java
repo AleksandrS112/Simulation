@@ -9,12 +9,13 @@
  *     nextTurn() - просимулировать и отрендерить один ход
  *     startSimulation() - запустить бесконечный цикл симуляции и рендеринга
  *     pauseSimulation() - приостановить бесконечный цикл симуляции и рендеринга
- */
+*/
+
+
 public class Simulation {
-        Map map;
+        private Map map;
         private int moveCount;
-        private String displayMap;
-        private Action action;
+      //private Action action;
 
         public Simulation() {
                 this.map = new Map();
@@ -22,7 +23,13 @@ public class Simulation {
         }
 
         void nextTurn() {
-
+                if (this.moveCount == 0) {
+                        action.prepareMap(map);
+                } else {
+                        // action одна симуляция (map)
+                }
+                System.out.println(this.displayMap);
+                this.moveCount++;
         }
 
         void startSimulation() {
@@ -33,4 +40,11 @@ public class Simulation {
 
         }
 
+        void setDisplayMap(String displayMap) {
+                this.displayMap = displayMap;
+        }
+
+        String getDisplayMap () {
+                return displayMap;
+        }
 }

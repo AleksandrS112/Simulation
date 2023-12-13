@@ -10,11 +10,22 @@ package entity.creature;
  */
 public class Predator extends Creature {
 
-    private int аttackPower;
-    private int аttackRange;
+    private static final    int INITIAL_HEALTH_POINT = 20;
+    private static final    int INITIAL_SPEED = 2;
+    private static final    int INITIAL_HUNGER = 3;
+    private static final String INITIAL_IMAGE = "\uD83D\uDC2F";
+    private static final    int INITIAL_ATTACK_POWER = 2;
+    private static final    int INITIAL_ATTACK_RANGE = 2;
+
+    private static int аttackPower;
+    private static int аttackRange;
 
 
     public Predator() {
-        this.image = "\uD83D\uDC2F";
+        super(INITIAL_HEALTH_POINT, INITIAL_SPEED, INITIAL_HUNGER, INITIAL_IMAGE);
+        this.аttackPower = INITIAL_ATTACK_POWER;
+        this.аttackRange = INITIAL_ATTACK_RANGE;
     }
+
+
 }
