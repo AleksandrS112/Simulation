@@ -1,4 +1,5 @@
 import entity.Entity;
+import entity.creature.Herbivore;
 import entity.creature.Predator;
 
 /**
@@ -15,18 +16,34 @@ import entity.creature.Predator;
 public class Action {
 
     public Action(Map map) {
-        for (int i=0; i<map.MAX_HEIGHT; i++) {
-            for (int j=0; j<map.MAX_LENGTH; j++) {
-                Predator en1 = new Predator();
-                map.matrix[i][j] = en1;
-            }
-        }
+
     }
 
     public void fillMap (Map map) {
-        for (int i=0; i<2 ; i++) {
-            boolean is
+
+        for (int i=0, x=0, y=0; i<Predator.getQuantity(); i++) {
+            while (true) {
+                x = 1 + (int) (Math.random() * ((map.getLength()-1) - 1 + 1));
+                y = 1 + (int) (Math.random() * ((map.getHeight()-1) - 1 + 1));
+                System.out.println(x +" " +y);
+                if (map.getEntity(x, y) == null)
+                    break;
+            }
+            map.setEntity(x,y,new Predator());
         }
+        for (int i = 0, x = 0, y = 0; i< Herbivore.getQuantity(); i++) {
+            while (true) {
+                x = 1 + (int) (Math.random() * ((map.getLength()-1) - 1 + 1));
+                y = 1 + (int) (Math.random() * ((map.getHeight()-1) - 1 + 1));
+                System.out.println(x +" " +y);
+                if (map.getEntity(x, y) == null)
+                    break;
+            }
+            map.setEntity(x,y,new Herbivore());
+        }
+
+
+
         //поставить существ
         //поставить камни
     }

@@ -15,7 +15,7 @@ public class Map {
     }
 
     public Entity getEntity(int x, int y) {
-        return this.matrixMap[y][x];
+        return this.matrixMap[y-1][x-1];
     }
     public void setEntity(int x, int y, Entity entity) {
         this.matrixMap[y][x] = entity;
@@ -28,11 +28,19 @@ public class Map {
                 if (this.matrixMap[i][j] != null)
                     displayMap += this.matrixMap[i][j].getImage() + " ";
                 else
-                    System.out.print("  ");
+                    displayMap += "  ";
             }
             displayMap += "\n";
         }
         return displayMap;
+    }
+
+    int getLength() {
+        return LENGTH;
+    }
+
+    int getHeight() {
+        return HEIGHT;
     }
 
 
