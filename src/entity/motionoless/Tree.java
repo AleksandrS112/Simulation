@@ -1,19 +1,23 @@
-/*
+
 package entity.motionoless;
 
-*/
+
 /**
  * Класс "Дерево" наследуется от класса неподвижных объектов
- *//*
+ */
 
 
 public class Tree extends Motionless {
 
-    public Tree() {
-        this.image = "\uD83C\uDF32";
-    }
+        private static final String INITIAL_IMAGE = "\uD83C\uDF33";
+        private static final int QUANTITY = 10;
 
+        public Tree() {
+            super(INITIAL_IMAGE);
+        }
+
+        public static int getQuantity() {
+            return QUANTITY;
+        }
 
 }
-
-*/

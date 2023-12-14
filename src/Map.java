@@ -15,7 +15,7 @@ public class Map {
     }
 
     public Entity getEntity(int x, int y) {
-        return this.matrixMap[y-1][x-1];
+        return this.matrixMap[y][x];
     }
     public void setEntity(int x, int y, Entity entity) {
         this.matrixMap[y][x] = entity;
@@ -26,9 +26,9 @@ public class Map {
         for (int i = 0; i<this.HEIGHT; i++) {
             for (int j = 0; j<this.LENGTH; j++) {
                 if (this.matrixMap[i][j] != null)
-                    displayMap += this.matrixMap[i][j].getImage() + " ";
+                    displayMap += this.matrixMap[i][j].getImage();
                 else
-                    displayMap += "  ";
+                    displayMap += "⬜";
             }
             displayMap += "\n";
         }

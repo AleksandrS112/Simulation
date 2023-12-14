@@ -21,6 +21,8 @@ public class Predator extends Creature {
     private static int аttackPower;
     private static int аttackRange;
 
+    private Herbivore target;
+
 
     public Predator() {
         super(INITIAL_HEALTH_POINT, INITIAL_SPEED, INITIAL_HUNGER, INITIAL_IMAGE);

@@ -1,22 +1,27 @@
-/*
 package entity.motionoless;
 
-import entity.motionoless.Motionless;
 
-*/
 /**
  * Класс "Трава" (ресурс для травоядных) наследуется от класса неподвижных объектов
- * Имеет количество HP ☑
- *//*
+ * Имеет количество HP
+ */
+
 
 public class Grass extends Motionless {
 
-    private int healthPoints;
+    private static final int INITIAL_AMOUNT = 10;
+    private static final String INITIAL_IMAGE = "\uD83E\uDD6C";
+    private static final int QUANTITY = 7;
 
-    void setHealthPoints(int healthPoints) {
+    private int amount;
 
+    public Grass() {
+        super(INITIAL_IMAGE);
+        this.amount = INITIAL_AMOUNT;
     }
 
+    public static int getQuantity() {
+        return QUANTITY;
+    }
 
 }
-*/
