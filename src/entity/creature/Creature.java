@@ -22,4 +22,8 @@ public abstract class Creature extends Entity {
         this.hunger = hunger;
     }
 
+    void makeMove(Creature creature) {
+
+    }
+
 }

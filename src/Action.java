@@ -5,6 +5,11 @@ import entity.motionoless.Grass;
 import entity.motionoless.Rock;
 import entity.motionoless.Tree;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  *  Action - действие, совершаемое над миром. Например - сходить всеми существами.
  *  Это действие итерировало бы существ и вызывало каждому makeMove().
@@ -22,55 +27,68 @@ public class Action {
 
     }
 
-    public void fillMap (Map map) {
-        for (int i=0, x=0, y=0; i<Predator.getQuantity(); i++) {
-            while (true) {
-                x = (int)(Math.random() * map.getLength());
-                y = (int)(Math.random() * map.getHeight());
-                if (map.getEntity(x, y) == null)
-                    break;
-            }
-            map.setEntity(x,y,new Predator());
+    static void initAndTurnActions(Map map) {
+        int i = (int) Arrays.stream(map.getMatrixMap()).flatMap(Arrays::stream)
+                    .filter(Herbivore.class::isInstance).count();
+        for( ; i< Herbivore.getQuantity(); i++) {
+            Cell cell = findEmptyCell(map);
+            map.setEntity(cell.getX(),cell.getY(), new Herbivore());
         }
-        for (int i = 0, x = 0, y = 0; i< Herbivore.getQuantity(); i++) {
-            while (true) {
-                x = (int)(Math.random() * map.getLength());
-                y = (int)(Math.random() * map.getHeight());
-                if (map.getEntity(x, y) == null)
-                    break;
-            }
-            map.setEntity(x,y,new Herbivore());
+        i = (int) Arrays.stream(map.getMatrixMap()).flatMap(Arrays::stream)
+                .filter(Predator.class::isInstance).count();
+        for( ; i< Predator.getQuantity(); i++) {
+            Cell cell = findEmptyCell(map);
+            map.setEntity(cell.getX(),cell.getY(), new Predator());
         }
-        for (int i = 0, x = 0, y = 0; i< Grass.getQuantity(); i++) {
-            while (true) {
-                x = (int)(Math.random() * map.getLength());
-                y = (int)(Math.random() * map.getHeight());
-                if (map.getEntity(x, y) == null)
-                    break;
-            }
-            map.setEntity(x,y,new Grass());
+        i = (int) Arrays.stream(map.getMatrixMap()).flatMap(Arrays::stream)
+                .filter(Grass.class::isInstance).count();
+        for( ; i< Grass.getQuantity(); i++) {
+            Cell cell = findEmptyCell(map);
+            map.setEntity(cell.getX(),cell.getY(), new Grass());
         }
-        for (int i = 0, x = 0, y = 0; i< Rock.getQuantity(); i++) {
-            while (true) {
-                x = (int)(Math.random() * map.getLength());
-                y = (int)(Math.random() * map.getHeight());
-                if (map.getEntity(x, y) == null)
-                    break;
-            }
-            map.setEntity(x,y,new Rock());
+        i = (int) Arrays.stream(map.getMatrixMap()).flatMap(Arrays::stream)
+                .filter(Rock.class::isInstance).count();
+        for( ; i< Rock.getQuantity(); i++) {
+            Cell cell = findEmptyCell(map);
+            map.setEntity(cell.getX(),cell.getY(), new Rock());
         }
-        for (int i = 0, x = 0, y = 0; i< Tree.getQuantity(); i++) {
-            while (true) {
-                x = (int)(Math.random() * map.getLength());
-                y = (int)(Math.random() * map.getHeight());
-                if (map.getEntity(x, y) == null)
-                    break;
-            }
-            map.setEntity(x,y,new Tree());
+        i = (int) Arrays.stream(map.getMatrixMap()).flatMap(Arrays::stream)
+                .filter(Tree.class::isInstance).count();
+        for(; i< Tree.getQuantity(); i++) {
+            Cell cell = findEmptyCell(map);
+            map.setEntity(cell.getX(),cell.getY(), new Tree());
         }
+    }
 
-        //поставить существ
-        //поставить камни
+    static Cell findEmptyCell(Map map) {
+        while (true) {
+            int x = (int) (Math.random() * map.getLength());
+            int y = (int) (Math.random() * map.getHeight());
+            if (map.getEntity(x, y) == null) {
+                return new Cell(x,y);
+            }
+        }
     }
 
 }
+class Cell {
+
+    int x;
+    int y;
+
+    Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    int getX() {
+        return this.x;
+    }
+
+    int getY() {
+        return this.y;
+    }
+
+
+}
+

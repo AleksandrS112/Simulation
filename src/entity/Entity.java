@@ -7,16 +7,11 @@ public abstract class Entity {     //- сущность (объект) на до
 
     private int x;
     private int y;
-    protected String image;
+    private String image;
 
     protected Entity(String image) {
         this.image = image;
     }
-
-
-
-
-
 
     public String getImage() {
         return this.image;

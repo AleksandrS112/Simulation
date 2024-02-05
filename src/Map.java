@@ -6,7 +6,7 @@ import entity.Entity;
 
 public class Map {
 
-    private static final int LENGTH = 30;   //- максимальная длина
+    private static final int LENGTH = 20;   //- максимальная длина
     private static final int HEIGHT = 8;    //- максимальная высота
     private Entity[][] matrixMap;           //- двумерный массив из объектов (сущностей)
 
@@ -17,6 +17,7 @@ public class Map {
     public Entity getEntity(int x, int y) {
         return this.matrixMap[y][x];
     }
+
     public void setEntity(int x, int y, Entity entity) {
         this.matrixMap[y][x] = entity;
     }
@@ -33,6 +34,9 @@ public class Map {
             displayMap += "\n";
         }
         return displayMap;
+    }
+    Entity[][] getMatrixMap() {
+        return this.matrixMap;
     }
 
     int getLength() {

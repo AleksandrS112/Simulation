@@ -9,7 +9,7 @@ package entity.motionoless;
 
 public class Tree extends Motionless {
 
-        private static final String INITIAL_IMAGE = "\uD83C\uDF33";
+        private static final String INITIAL_IMAGE = "\uD83C\uDF34";
         private static final int QUANTITY = 10;
 
         public Tree() {
