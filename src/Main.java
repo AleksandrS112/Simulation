@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("Бесконечная симуляци - [A], по 1 симуляции всего поля - [B], по ходам сущщества [C], выйди [D]");
+            System.out.println("Бесконечная симуляци [A], по 1 симуляции всего поля [B], по ходам сущщества [C], выйди [D]");
             String input = sc.nextLine().toUpperCase();
             switch (input) {
                 case "A":

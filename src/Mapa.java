@@ -1,16 +1,16 @@
-import entity.Entity;
+import entity.*;
 
 /**
  * Карта, содержит в себе коллекцию для хранения существ и их расположения.
  */
 
-public class Map {
+public class Mapa {
 
-    private static final int LENGTH = 20;   //- максимальная длина
-    private static final int HEIGHT = 8;    //- максимальная высота
+    private static final int LENGTH = 10;   //- максимальная длина
+    private static final int HEIGHT = 5;    //- максимальная высота
     private Entity[][] matrixMap;           //- двумерный массив из объектов (сущностей)
 
-    public Map () {
+    public Mapa() {
         this.matrixMap = new Entity[HEIGHT][LENGTH];
     }
 
@@ -31,7 +31,8 @@ public class Map {
                 else
                     displayMap += "⬜";
             }
-            displayMap += "\n";
+            if (i<this.HEIGHT-1)
+                displayMap += "\n";
         }
         return displayMap;
     }

@@ -1,6 +1,7 @@
 package entity.creature;
 
-import entity.Entity;
+import entity.*;
+import base.Mapa;
 
 /**
  * Абстрактный класс "Существо" наследуется от корневого абстрактного класа, имеет:
@@ -15,15 +16,14 @@ public abstract class Creature extends Entity {
     private int speed;
     private int hunger;
 
-    protected Creature(int healthPoints, int speed, int hunger, String image) {
+    public Creature(int healthPoints, int speed, int hunger, String image) {
         super(image);
         this.healthPoints = healthPoints;
         this.speed = speed;
         this.hunger = hunger;
     }
 
-    void makeMove(Creature creature) {
-
+    public void makeMove(Mapa mapa) {
+        System.out.println(5);
     }
-
 }
