@@ -11,7 +11,7 @@ public class Grass extends Motionless {
 
     private static final int INITIAL_AMOUNT = 10;
     private static final String INITIAL_IMAGE = "\uD83E\uDD6C";
-    private static final int QUANTITY = 2;
+    private static final int QUANTITY = 3;
 
     private int amount;
 

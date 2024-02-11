@@ -1,25 +1,34 @@
+package MapWorld;
+
 import entity.*;
 
 /**
  * Карта, содержит в себе коллекцию для хранения существ и их расположения.
  */
 
-public class Mapa {
+public class MapWorld {
 
     private static final int LENGTH = 10;   //- максимальная длина
-    private static final int HEIGHT = 5;    //- максимальная высота
+    private static final int HEIGHT = 8;    //- максимальная высота
     private Entity[][] matrixMap;           //- двумерный массив из объектов (сущностей)
 
-    public Mapa() {
+    public MapWorld() {
         this.matrixMap = new Entity[HEIGHT][LENGTH];
     }
 
-    public Entity getEntity(int x, int y) {
+    public Entity getEntity(int y, int x) {
         return this.matrixMap[y][x];
     }
 
-    public void setEntity(int x, int y, Entity entity) {
-        this.matrixMap[y][x] = entity;
+    public void setEntity(int y, int x, Entity entity) {
+        if (entity == null)
+            this.matrixMap[y][x] = null;
+        else {
+            this.matrixMap[y][x] = entity;
+            this.matrixMap[entity.getY()][entity.getX()] = null;
+            entity.setXY(y, x);
+            System.out.println(entity.getImage() + " -> [" + y + ";" + x + "]");
+        }
     }
 
     public String prepareMapDisplay() {         //подготовить отображение карты
@@ -36,15 +45,15 @@ public class Mapa {
         }
         return displayMap;
     }
-    Entity[][] getMatrixMap() {
+    public Entity[][] getMatrixMap() {
         return this.matrixMap;
     }
 
-    int getLength() {
+    public int getLength() {
         return LENGTH;
     }
 
-    int getHeight() {
+    public int getHeight() {
         return HEIGHT;
     }
 

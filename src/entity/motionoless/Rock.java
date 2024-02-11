@@ -9,7 +9,7 @@ import entity.motionoless.Motionless;
 public class Rock extends Motionless {
 
     private static final String INITIAL_IMAGE = "\uD83E\uDDF1";
-    private static final int QUANTITY = 2;
+    private static final int QUANTITY = 3;
 
     public Rock() {
         super(INITIAL_IMAGE);

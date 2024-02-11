@@ -1,4 +1,9 @@
+import MapWorld.MapWorld;
+import entity.Entity;
 import entity.creature.Creature;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Главный класс приложения, включает в себя:
@@ -17,24 +22,30 @@ import entity.creature.Creature;
 
 public class Simulation {
 
-        public Mapa mapa;
+        public MapWorld mapWorld;
         private int moveCount;
 
         public Simulation() {
-                this.mapa = new Mapa();
-                Action.initAndTurnActions(this.mapa);
+                this.mapWorld = new MapWorld();
+                Action.initAndTurnActions(this.mapWorld);
+                System.out.println(this.mapWorld.prepareMapDisplay());
         }
 
         void nextTurn() {
-                for (int i = 0; i < this.mapa.getHeight(); i++) {
-                        for (int j = 0; j < this.mapa.getLength(); j++) {
-                                if (this.mapa.getEntity(j, i) instanceof Creature) {
-                                        Creature creature = (Creature) this.mapa.getEntity(j, i);
-                                        creature.makeMove(this.mapa);
+                Action.initAndTurnActions(this.mapWorld);
+                List<Creature> repetitive = new ArrayList<>();
+                for (int i = 0; i < this.mapWorld.getHeight()-1; i++) {
+                        for (int j = 0; j < this.mapWorld.getLength()-1; j++) {
+                                if (this.mapWorld.getEntity(i, j) == null)
+                                        continue;
+                                if (this.mapWorld.getEntity(i, j) instanceof Creature && !repetitive.contains(this.mapWorld.getEntity(i, j))) {
+                                        Creature creature = (Creature) this.mapWorld.getEntity(i, j);
+                                        repetitive.add(creature);
+                                        creature.makeMove(this.mapWorld);
                                 }
                         }
                 }
-                System.out.println(this.mapa.prepareMapDisplay());
+                System.out.println(this.mapWorld.prepareMapDisplay());
         }
 }
 

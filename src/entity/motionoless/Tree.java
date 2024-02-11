@@ -10,7 +10,7 @@ package entity.motionoless;
 public class Tree extends Motionless {
 
         private static final String INITIAL_IMAGE = "\uD83C\uDF34";
-        private static final int QUANTITY = 2;
+        private static final int QUANTITY = 3;
 
         public Tree() {
             super(INITIAL_IMAGE);
