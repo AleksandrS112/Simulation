@@ -25,15 +25,15 @@ public class Action {
 
     static void initAndTurnActions(MapWorld mapWorld) {
         for (int i = mapWorld.countOfEntityOnTheMap(Herbivore.class); i < Herbivore.getQuantity(); i++)
-            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Herbivore());
+            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Herbivore(mapWorld));
         for (int i = mapWorld.countOfEntityOnTheMap(Predator.class); i < Predator.getQuantity(); i++)
-            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Predator());
+            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Predator(mapWorld));
         for (int i = mapWorld.countOfEntityOnTheMap(Grass.class); i < Grass.getQuantity(); i++)
-            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Grass());
+            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Grass(mapWorld));
         for (int i = mapWorld.countOfEntityOnTheMap(Rock.class); i < Rock.getQuantity(); i++)
-            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Rock());
+            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Rock(mapWorld));
         for (int i = mapWorld.countOfEntityOnTheMap(Tree.class); i < Tree.getQuantity(); i++)
-            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Tree());
+            mapWorld.setEntity(Cell.findEmptyCell(mapWorld), new Tree(mapWorld));
     }
 
 }

@@ -1,16 +1,16 @@
 package entity;
 
+import MapWorld.MapWorld;
 
-/**
- * Корневой абстрактный класс для всех существ и объектов существующих в симуляции.
- */
-public abstract class Entity {     //- сущность (объект) на доске
+public abstract class Entity {
 
     private int y;
     private int x;
+    private final MapWorld mapWorld;
     private final String image;
 
-    protected Entity(String image) {
+    protected Entity(MapWorld mapWorld, String image) {
+        this.mapWorld = mapWorld;
         this.image = image;
     }
 

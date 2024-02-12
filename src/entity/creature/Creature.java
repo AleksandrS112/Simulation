@@ -18,8 +18,8 @@ public abstract class Creature extends Entity {
     protected int hunger;
     private int range;
 
-    Creature(String image, int healthPoints, int speed, int hunger,  int range) {
-        super(image);
+    Creature(MapWorld mapWorld, String image, int healthPoints, int speed, int hunger,  int range) {
+        super(mapWorld, image);
         this.healthPoints = healthPoints;
         this.speed = speed;
         this.hunger = hunger;

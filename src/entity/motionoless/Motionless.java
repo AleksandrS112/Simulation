@@ -1,5 +1,6 @@
 package entity.motionoless;
 
+import MapWorld.MapWorld;
 import entity.Entity;
 
 /**
@@ -8,8 +9,8 @@ import entity.Entity;
 
 public abstract class Motionless extends Entity {
 
-    Motionless (String image) {
-        super(image);
+    Motionless (MapWorld mapWorld, String image) {
+        super(mapWorld, image);
     }
 
 }

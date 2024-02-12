@@ -5,7 +5,7 @@ public class Cell {
     private int x;
     private int y;
 
-    public Cell(int y, int x) {
+    Cell(int y, int x) {
         this.y = y;
         this.x = x;
     }

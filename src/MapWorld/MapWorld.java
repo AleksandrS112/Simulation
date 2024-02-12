@@ -10,9 +10,9 @@ import java.util.Arrays;
 
 public class MapWorld {
 
-    private static final int LENGTH = 10;   //- максимальная длина
-    private static final int HEIGHT = 8;    //- максимальная высота
-    private Entity[][] matrixMap;           //- двумерный массив из объектов (сущностей)
+    private static final int LENGTH = 10;
+    private static final int HEIGHT = 8;
+    private Entity[][] matrixMap;
 
     public MapWorld() {
         this.matrixMap = new Entity[HEIGHT][LENGTH];
@@ -42,20 +42,22 @@ public class MapWorld {
     }
 
     public int countOfEntityOnTheMap(Class<? extends Entity> classEntity) {
-        return (int) Arrays.stream(this.getMatrixMap()).flatMap(Arrays::stream)
-                .filter(classEntity::isInstance).count();
+        return (int) Arrays.stream(this.getMatrixMap())
+                           .flatMap(Arrays::stream)
+                           .filter(classEntity::isInstance)
+                           .count();
     }
 
-    public String prepareMapDisplay() {         //подготовить отображение карты
+    public String prepareMapDisplay() {
         String displayMap = "";
-        for (int i = 0; i<this.HEIGHT; i++) {
-            for (int j = 0; j<this.LENGTH; j++) {
+        for (int i = 0; i<this.getHeight(); i++) {
+            for (int j = 0; j<this.getLength(); j++) {
                 if (this.matrixMap[i][j] != null)
                     displayMap += this.matrixMap[i][j].getImage();
                 else
                     displayMap += "⬜";
             }
-            if (i<this.HEIGHT-1)
+            if (i<this.getHeight()-1)
                 displayMap += "\n";
         }
         return displayMap;

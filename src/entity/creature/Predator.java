@@ -27,8 +27,8 @@ public class Predator extends Creature {
     private Herbivore target;
 
 
-    public Predator() {
-        super(IMAGE, INITIAL_HEALTH_POINT, INITIAL_SPEED, INITIAL_HUNGER, INITIAL_RANGE);
+    public Predator(MapWorld mapWorld) {
+        super(mapWorld, IMAGE, INITIAL_HEALTH_POINT, INITIAL_SPEED, INITIAL_HUNGER, INITIAL_RANGE);
         this.аttackPower = INITIAL_ATTACK_POWER;
     }
 

@@ -24,8 +24,8 @@ public class Herbivore extends Creature {
 
     private Grass target;
 
-    public Herbivore() {
-        super(IMAGE, INITIAL_HEALTH_POINT, INITIAL_SPEED, INITIAL_HUNGER, INITIAL_RANGE);
+    public Herbivore(MapWorld mapWorld) {
+        super(mapWorld, IMAGE, INITIAL_HEALTH_POINT, INITIAL_SPEED, INITIAL_HUNGER, INITIAL_RANGE);
     }
 
     public static int getQuantity() {
