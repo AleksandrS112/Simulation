@@ -2,6 +2,8 @@ package MapWorld;
 
 import entity.*;
 
+import java.util.Arrays;
+
 /**
  * Карта, содержит в себе коллекцию для хранения существ и их расположения.
  */
@@ -26,9 +28,22 @@ public class MapWorld {
         else {
             this.matrixMap[y][x] = entity;
             this.matrixMap[entity.getY()][entity.getX()] = null;
-            entity.setXY(y, x);
+            entity.setYX(y, x);
             System.out.println(entity.getImage() + " -> [" + y + ";" + x + "]");
         }
+    }
+
+    public void setEntity(Cell cell, Entity entity) {
+        setEntity(cell.getY(),cell.getX(), entity);
+    }
+
+    boolean cellIsEmpty(int y, int x) {
+        return this.getEntity(y, x) == null ? true : false;
+    }
+
+    public int countOfEntityOnTheMap(Class<? extends Entity> classEntity) {
+        return (int) Arrays.stream(this.getMatrixMap()).flatMap(Arrays::stream)
+                .filter(classEntity::isInstance).count();
     }
 
     public String prepareMapDisplay() {         //подготовить отображение карты

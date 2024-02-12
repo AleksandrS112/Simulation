@@ -1,8 +1,7 @@
 package entity.creature;
 
-import entity.*;
 import MapWorld.MapWorld;
-
+import entity.Entity;
 import java.util.Optional;
 
 /**
@@ -27,11 +26,11 @@ public abstract class Creature extends Entity {
         this.range = range;
     }
 
+    public abstract void makeMove(MapWorld map);
+
     public int getRange() {
         return range;
     }
-
-    public abstract void makeMove(MapWorld map);
 
     Optional<? extends Entity> searchForGoal(MapWorld map, Class <? extends Entity> classTarget ) {
         int x = getX();

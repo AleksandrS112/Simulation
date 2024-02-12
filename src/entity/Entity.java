@@ -8,7 +8,7 @@ public abstract class Entity {     //- сущность (объект) на до
 
     private int y;
     private int x;
-    private String image;
+    private final String image;
 
     protected Entity(String image) {
         this.image = image;
@@ -18,7 +18,7 @@ public abstract class Entity {     //- сущность (объект) на до
         return this.image;
     }
 
-    public void setXY(int y, int x) {
+    public void setYX (int y, int x) {
         this.y = y;
         this.x = x;
     }
