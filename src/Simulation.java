@@ -1,9 +1,4 @@
 import MapWorld.MapWorld;
-import entity.Entity;
-import entity.creature.Creature;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Главный класс приложения, включает в себя:
@@ -22,30 +17,68 @@ import java.util.List;
 
 public class Simulation {
 
-        public MapWorld mapWorld;
+        private final int quantityHerbivore;
+        private final int quantityPredator;
+        private final int quantityGrass;
+        private final int quantityRock;
+        private final int quantityTree;
+        private MapWorld mapWorld;
         private int moveCount;
 
-        public Simulation() {
-                this.mapWorld = new MapWorld();
-                Action.initAndTurnActions(this.mapWorld);
-                System.out.println(this.mapWorld.prepareMapDisplay());
+
+        public Simulation(int heightMapWorld, int lengthMapWorld,
+                          int quantityHerbivore, int quantityPredator,
+                          int quantityGrass,
+                          int quantityRock, int quantityTree)
+        {
+                        this.mapWorld = new MapWorld(heightMapWorld, lengthMapWorld);
+                        this.quantityHerbivore = quantityHerbivore;
+                        this.quantityPredator = quantityPredator;
+                        this.quantityGrass = quantityGrass;
+                        this.quantityRock = quantityRock;
+                        this.quantityTree = quantityTree;
         }
 
-        void nextTurn() {
-                Action.initAndTurnActions(this.mapWorld);
-                List<Creature> repetitive = new ArrayList<>();
-                for (int i = 0; i < this.mapWorld.getHeight()-1; i++) {
-                        for (int j = 0; j < this.mapWorld.getLength()-1; j++) {
-                                if (this.mapWorld.getEntity(i, j) == null)
-                                        continue;
-                                if (this.mapWorld.getEntity(i, j) instanceof Creature && !repetitive.contains(this.mapWorld.getEntity(i, j))) {
-                                        Creature creature = (Creature) this.mapWorld.getEntity(i, j);
-                                        repetitive.add(creature);
-                                        creature.makeMove(this.mapWorld);
-                                }
-                        }
+        public void nextTurn() {
+                Action.turnActions(this);
+                moveCount++;
+                System.out.println(Render.renderMapWorld(this));
+        }
+
+        public void startSimulation() {
+                Action.initAndSpawnActions(this);
+                Render.renderMapWorld(this);
+                while (true) {
+                        this.nextTurn();
                 }
-                System.out.println(this.mapWorld.prepareMapDisplay());
+        }
+
+        public MapWorld getMapWorld() {
+                return mapWorld;
+        }
+
+        public int getQuantityHerbivore() {
+                return quantityHerbivore;
+        }
+
+        public int getQuantityPredator() {
+                return quantityPredator;
+        }
+
+        public int getQuantityGrass() {
+                return quantityGrass;
+        }
+
+        public int getQuantityRock() {
+                return quantityRock;
+        }
+
+        public int getQuantityTree() {
+                return quantityTree;
+        }
+
+        public int getMoveCount() {
+                return moveCount;
         }
 }
 

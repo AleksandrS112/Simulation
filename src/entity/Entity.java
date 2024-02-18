@@ -4,9 +4,7 @@ import MapWorld.MapWorld;
 
 public abstract class Entity {
 
-    private int y;
-    private int x;
-    private final MapWorld mapWorld;
+    protected final MapWorld mapWorld;
     private final String image;
 
     protected Entity(MapWorld mapWorld, String image) {
@@ -18,25 +16,12 @@ public abstract class Entity {
         return this.image;
     }
 
-    public void setYX (int y, int x) {
-        this.y = y;
-        this.x = x;
-    }
-
     public int getY() {
-        return this.y;
+        return mapWorld.getCellEntity(this).getY();
     }
-
     public int getX() {
-        return this.x;
+        return mapWorld.getCellEntity(this).getX();
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
 }
 

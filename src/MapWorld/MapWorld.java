@@ -1,83 +1,68 @@
 package MapWorld;
 
 import entity.*;
+import entity.creature.Creature;
+import MapWorld.Cell;
 
-import java.util.Arrays;
-
-/**
- * Карта, содержит в себе коллекцию для хранения существ и их расположения.
- */
+import java.util.*;
 
 public class MapWorld {
 
-    private static final int LENGTH = 10;
-    private static final int HEIGHT = 8;
-    private Entity[][] matrixMap;
+    private final int height;
+    private final int length;
+    private HashMap<Cell, Entity> map;
 
-    public MapWorld() {
-        this.matrixMap = new Entity[HEIGHT][LENGTH];
+    public MapWorld(int height, int length) {
+        this.map = new HashMap<Cell, Entity>();
+        this.height = height;
+        this.length = length;
     }
 
-    public Entity getEntity(int y, int x) {
-        return this.matrixMap[y][x];
+    public boolean cellIsEmpty(Cell cell) {
+        return !map.containsKey(cell);
     }
 
-    public void setEntity(int y, int x, Entity entity) {
-        if (entity == null)
-            this.matrixMap[y][x] = null;
-        else {
-            this.matrixMap[y][x] = entity;
-            this.matrixMap[entity.getY()][entity.getX()] = null;
-            entity.setYX(y, x);
-            System.out.println(entity.getImage() + " -> [" + y + ";" + x + "]");
-        }
+    public Entity getEntity(Cell cell) {
+        return map.get(cell);
+    }
+
+    public List<Entity> getListEntity() {
+       return new ArrayList<Entity>(map.values());
+    }
+
+    public List<Creature> getListCreature() {
+        return this.map.values().stream()
+                .filter(entity -> entity instanceof Creature)
+                .map(e -> (Creature) e)
+                .toList();
+    }
+
+    public boolean isTheEntityOnTheMap (Entity entity) {
+        return map.containsValue(entity);
     }
 
     public void setEntity(Cell cell, Entity entity) {
-        setEntity(cell.getY(),cell.getX(), entity);
+        map.put(cell, entity);
     }
 
-    boolean cellIsEmpty(int y, int x) {
-        return this.getEntity(y, x) == null ? true : false;
-    }
-
-    public int countOfEntityOnTheMap(Class<? extends Entity> classEntity) {
-        return (int) Arrays.stream(this.getMatrixMap())
-                           .flatMap(Arrays::stream)
-                           .filter(classEntity::isInstance)
-                           .count();
-    }
-
-    public String prepareMapDisplay() {
-        String displayMap = "";
-        for (int i = 0; i<this.getHeight(); i++) {
-            for (int j = 0; j<this.getLength(); j++) {
-                if (this.matrixMap[i][j] != null)
-                    displayMap += this.matrixMap[i][j].getImage();
-                else
-                    displayMap += "⬜";
-            }
-            if (i<this.getHeight()-1)
-                displayMap += "\n";
-        }
-        return displayMap;
-    }
-    public Entity[][] getMatrixMap() {
-        return this.matrixMap;
-    }
-
-    public int getLength() {
-        return LENGTH;
+    public Cell getCellEntity(Entity entity) {
+        return this.map.entrySet().stream()
+                .filter(e -> e.getValue() == entity)
+                .map(e -> e.getKey())
+                .findFirst()
+                .get();
     }
 
     public int getHeight() {
-        return HEIGHT;
+        return height;
     }
 
-
-
+    public int getLength() {
+        return length;
+    }
 
 }
+
 
 
 
