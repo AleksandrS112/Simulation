@@ -3,6 +3,7 @@ package MapWorld;
 import entity.*;
 import entity.creature.Creature;
 import MapWorld.Cell;
+import entity.creature.Herbivore;
 
 import java.util.*;
 
@@ -37,12 +38,20 @@ public class MapWorld {
                 .toList();
     }
 
+    public int countEntityClass (Class requiredClass) {
+        return (int) this.getListEntity().stream().filter(e -> e.getClass() == requiredClass).count();
+    }
+
     public boolean isTheEntityOnTheMap (Entity entity) {
         return map.containsValue(entity);
     }
 
-    public void setEntity(Cell cell, Entity entity) {
+    public void addEntity(Cell cell, Entity entity) {
         map.put(cell, entity);
+    }
+
+    public void moveEntity(Cell targetСell, Creature creature) {
+        this.addEntity(targetСell, this.map.remove(this.getCellEntity(creature)));
     }
 
     public Cell getCellEntity(Entity entity) {

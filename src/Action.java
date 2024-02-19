@@ -1,5 +1,6 @@
 import MapWorld.MapWorld;
 import entity.Entity;
+import entity.creature.Creature;
 import entity.creature.Herbivore;
 import MapWorld.Cell;
 import entity.creature.Predator;
@@ -22,32 +23,27 @@ import java.util.List;
 public class Action {
 
     public static void initAndSpawnActions(Simulation sim) {
+        // если количество конкретных Entity на карте меньше чем должно быть спавнит до необходимого
         MapWorld mapWorld = sim.getMapWorld();
-        List<Entity> listEntity = mapWorld.getListEntity();
-        int i = (int) listEntity.stream().filter(e -> e instanceof Herbivore).count();
-        for ( ; i<sim.getQuantityHerbivore(); i++) {
+        for (int i = mapWorld.countEntityClass(Herbivore.class) ; i<sim.getQuantityHerbivore(); i++) {
             Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, Herbivore.createHerbivore(mapWorld));
+            mapWorld.addEntity(emptyCell, new Herbivore(mapWorld));
         }
-        i = (int) listEntity.stream().filter(e -> e instanceof Predator).count();
-        for ( ; i<sim.getQuantityPredator(); i++) {
+        for (int i = mapWorld.countEntityClass(Predator.class); i<sim.getQuantityPredator(); i++) {
             Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Predator(mapWorld));
+            mapWorld.addEntity(emptyCell, new Predator(mapWorld));
         }
-        i = (int) listEntity.stream().filter(e -> e instanceof Grass).count();
-        for ( ; i<sim.getQuantityGrass(); i++) {
+        for (int i = mapWorld.countEntityClass(Grass.class) ; i<sim.getQuantityGrass(); i++) {
             Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Grass(mapWorld));
+            mapWorld.addEntity(emptyCell, new Grass(mapWorld));
         }
-        i = (int) listEntity.stream().filter(e -> e instanceof Rock).count();
-        for ( ; i<sim.getQuantityRock(); i++) {
+        for (int i = mapWorld.countEntityClass(Rock.class) ; i<sim.getQuantityRock(); i++) {
             Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Rock(mapWorld));
+            mapWorld.addEntity(emptyCell, new Rock(mapWorld));
         }
-        i = (int) listEntity.stream().filter(e -> e instanceof Tree).count();
-        for ( ; i<sim.getQuantityTree(); i++) {
+        for (int i = mapWorld.countEntityClass(Tree.class) ; i<sim.getQuantityTree(); i++) {
             Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Tree(mapWorld));
+            mapWorld.addEntity(emptyCell, new Tree(mapWorld));
         }
     }
 
@@ -55,12 +51,11 @@ public class Action {
         // - если по координатам перебирать, то кто то может сходить 2 раза т.к. существа двигаются
         // - поэтому через лист но нужна проверка, что существо еще на карте т.к. оно может умереть
         //   пока ходят други существа и лист может быть уже не актуальным
-        for (Entity creature : sim.getMapWorld().getListCreature()) {
+        for (Creature creature : sim.getMapWorld().getListCreature()) {
             if (sim.getMapWorld().isTheEntityOnTheMap(creature)) {
-
+                creature.makeMove();
             }
         }
-        Action.initAndSpawnActions(sim);
     }
 
 }

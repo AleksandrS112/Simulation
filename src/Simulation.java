@@ -40,9 +40,10 @@ public class Simulation {
         }
 
         public void nextTurn() {
+                System.out.println(Render.renderMapWorld(this));
+                Action.initAndSpawnActions(this);
                 Action.turnActions(this);
                 moveCount++;
-                System.out.println(Render.renderMapWorld(this));
         }
 
         public void startSimulation() {
