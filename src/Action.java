@@ -23,32 +23,16 @@ public class Action {
 
     public static void initAndSpawnActions(Simulation sim) {
         MapWorld mapWorld = sim.getMapWorld();
-        List<Entity> listEntity = mapWorld.getListEntity();
-        int i = (int) listEntity.stream().filter(e -> e instanceof Herbivore).count();
-        for ( ; i<sim.getQuantityHerbivore(); i++) {
-            Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, Herbivore.createHerbivore(mapWorld));
-        }
-        i = (int) listEntity.stream().filter(e -> e instanceof Predator).count();
-        for ( ; i<sim.getQuantityPredator(); i++) {
-            Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Predator(mapWorld));
-        }
-        i = (int) listEntity.stream().filter(e -> e instanceof Grass).count();
-        for ( ; i<sim.getQuantityGrass(); i++) {
-            Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Grass(mapWorld));
-        }
-        i = (int) listEntity.stream().filter(e -> e instanceof Rock).count();
-        for ( ; i<sim.getQuantityRock(); i++) {
-            Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Rock(mapWorld));
-        }
-        i = (int) listEntity.stream().filter(e -> e instanceof Tree).count();
-        for ( ; i<sim.getQuantityTree(); i++) {
-            Cell emptyCell = Cell.findEmptyCell(mapWorld);
-            mapWorld.setEntity(emptyCell, new Tree(mapWorld));
-        }
+        for ( mapWorld.countEntiry(Herbivore) ; i<sim.getQuantityHerbivore(); i++) 
+            mapWorld.addEntity(Cell.findEmptyCell(mapWorld), Herbivore.createHerbivore(mapWorld));
+        for ( mapWorld.countEntiry(Herbivore) ; i<sim.getQuantityHerbivore(); i++) 
+            mapWorld.addEntity(Cell.findEmptyCell(mapWorld), Herbivore.createHerbivore(mapWorld));
+        for (  mapWorld.countEntiry(Herbivore); i<sim.getQuantityHerbivore(); i++) 
+            mapWorld.addEntity(Cell.findEmptyCell(mapWorld), Herbivore.createHerbivore(mapWorld));
+        for (  mapWorld.countEntiry(Herbivore) ; i<sim.getQuantityHerbivore(); i++) 
+            mapWorld.addEntity(Cell.findEmptyCell(mapWorld), Herbivore.createHerbivore(mapWorld));
+        for (  mapWorld.countEntiry(Herbivore); i<sim.getQuantityHerbivore(); i++) 
+            mapWorld.addEntity(Cell.findEmptyCell(mapWorld), Herbivore.createHerbivore(mapWorld));
     }
 
     public static void turnActions(Simulation sim) {
