@@ -17,7 +17,7 @@ public class Render {
                     .filter(h -> h.getTarget() != null)
                     .flatMap(e -> e.getTarget().getPath().stream())
                     .toList();
-
+// двумерный массив сделать туда добавлять по методам потом выводить его
             String renderMapWorld = "";
             renderMapWorld += ("Cимуляция " +sim.getMoveCount() +"\n");
             for (int i = 0; i < height; i++) {
