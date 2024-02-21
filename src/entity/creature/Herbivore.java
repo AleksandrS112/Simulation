@@ -1,7 +1,6 @@
 package entity.creature;
 
 import MapWorld.MapWorld;
-import entity.creature.BFS.BFS;
 import entity.motionoless.Grass;
 import MapWorld.Cell;
 
@@ -16,7 +15,7 @@ public class Herbivore extends Creature {
     private static final String IMAGE = "\uD83D\uDC2E";
     private static final int INITIAL_HEALTH_POINT = 100;
     private static final int INITIAL_SPEED = 1;
-    private static final int INITIAL_HUNGER = 3;
+    private static final int INITIAL_HUNGER = 5;
     private static final int INITIAL_RANGE = 1;
     private static final int RESTORE_HEALTH = 30;
     private Cell target;
@@ -30,23 +29,19 @@ public class Herbivore extends Creature {
     }
 
     public void makeMove() {
-            this.target = BFS.bfsDiagonalWithPath(mapWorld, this, Grass.class);
+            this.target = this.bfsDiagonalWithPath(mapWorld, Grass.class);
             if (target != null) {
                 if ((Math.abs(target.getY()-this.getY()) <= this.getAttackRange()) && (Math.abs(target.getX()-this.getX()) <= this.getAttackRange())) {
                     mapWorld.moveEntity(target, this);
-                    this.target = BFS.bfsDiagonalWithPath(mapWorld, this, Grass.class);
-                    this.increaseHealth(RESTORE_HEALTH);
+                    this.healthIncrease(RESTORE_HEALTH);
+                    this.target = null;
                 } else {
-                    target.getPath().removeFirst();
-                    mapWorld.moveEntity(target.getPath().getFirst(), this);
+                    target.getPath().poll();
+                    mapWorld.moveEntity(target.getPath().poll(), this);
                 }
             }
-            //если есть таргет
-                //попробовать сьесть
-                //иначе двигаться
-
-            //испытать голод
-
+            this.healthDecrease(INITIAL_HUNGER);
     }
+
 
 }

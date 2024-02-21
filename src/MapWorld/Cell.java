@@ -1,15 +1,12 @@
 package MapWorld;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Cell {
 
     private int y;
     private int x;
-    LinkedList<Cell> path;
+    Queue<Cell> path;
 
     public Cell(int y, int x) {
         this.y = y;
@@ -38,7 +35,7 @@ public class Cell {
 
     }
 
-    public LinkedList<Cell> getPath() {
+    public Queue<Cell> getPath() {
         return path;
     }
 

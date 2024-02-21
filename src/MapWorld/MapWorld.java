@@ -2,8 +2,6 @@ package MapWorld;
 
 import entity.*;
 import entity.creature.Creature;
-import MapWorld.Cell;
-import entity.creature.Herbivore;
 
 import java.util.*;
 
@@ -25,6 +23,10 @@ public class MapWorld {
 
     public Entity getEntity(Cell cell) {
         return map.get(cell);
+    }
+
+    public void deleteEntity(Cell cell) {
+        this.map.remove(cell);
     }
 
     public List<Entity> getListEntity() {
