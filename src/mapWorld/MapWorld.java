@@ -54,7 +54,9 @@ public class MapWorld {
     }
 
     public void moveEntity(Cell targetСell, Creature creature) {
-        this.addEntity(targetСell, this.map.remove(this.getCellEntity(creature)));
+        Cell oldCell = this.getCellEntity(creature);
+        this.addEntity(targetСell, this.map.remove(oldCell));
+        System.out.printf("%s [%s;%s] -> [%s;%s]\n",creature.getImage(),oldCell.getY(),oldCell.getX(),targetСell.getY(),targetСell.getX());
     }
 
     public Cell getCellEntity(Entity entity) {

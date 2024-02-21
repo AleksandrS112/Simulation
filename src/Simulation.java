@@ -10,6 +10,10 @@ public class Simulation {
         private MapWorld mapWorld;
         private int moveCount;
 
+        {
+                moveCount = 1;
+        }
+
 
         public Simulation(int heightMapWorld, int lengthMapWorld,
                           int quantityHerbivore, int quantityPredator,
@@ -33,8 +37,6 @@ public class Simulation {
         }
 
         public void startSimulation() {
-                Action.initAndSpawnActions(this);
-                Render.renderMapWorld(this);
                 while (true) {
                         this.nextTurn();
                 }

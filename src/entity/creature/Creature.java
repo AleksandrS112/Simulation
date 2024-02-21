@@ -29,7 +29,7 @@ public abstract class Creature extends Entity {
             newHP = 100;
         int difHP = newHP - oldHP;
         this.healthPoints = newHP;
-        System.out.println(this.getImage() +"-> " +oldHP +" + " +difHP +" = [" +this.getHealthPoints() +"] HP");
+        System.out.println(this.getImage() +" " +oldHP +" + " +difHP + "(" +increaseHealth + ")" +" = [" +this.getHealthPoints() +"] HP");
         return difHP;
     }
 
@@ -44,7 +44,7 @@ public abstract class Creature extends Entity {
         } else
             this.healthPoints = newHP;
         difHP = oldHP - newHP;
-        System.out.print(this.getImage() + "-> " + oldHP + " - " + difHP + "(" +healthDecrease + ")" + " = [" + this.getHealthPoints() + "] HP");
+        System.out.print(this.getImage() + " " + oldHP + " - " + difHP + "(" +healthDecrease + ")" + " = [" + this.getHealthPoints() + "] HP");
         System.out.println(newHP == 0 ? " ☠\uFE0F" : "");
         return difHP;
     }
