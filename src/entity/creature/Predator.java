@@ -25,26 +25,17 @@ public class Predator extends Creature {
     public void makeMove(){
         this.target = this.bfsDiagonalWithPath(mapWorld, Herbivore.class);
         if (target != null) {
-            for(int motion = 0; motion < this.getSpeed() ; motion++) {
                 if ((Math.abs(target.getY()-this.getY()) <= this.getAttackRange()) && (Math.abs(target.getX()-this.getX()) <= this.getAttackRange())) {
                     this.healthIncrease(((Herbivore) mapWorld.getEntity(target)).healthDecrease(this.аttackPower));
-                    break;
                 } else {
-                    target.getPath().poll();
-                    mapWorld.moveEntity(target.getPath().poll(), this);
+                    for(int motion = 0; motion < this.getSpeed() ; motion++) {
+                        target.getPath().poll();
+                        mapWorld.moveEntity(target.getPath().poll(), this);
+                    }
                 }
             }
-//            if ((Math.abs(target.getY()-this.getY()) <= this.getAttackRange()) && (Math.abs(target.getX()-this.getX()) <= this.getAttackRange())) {
-//                mapWorld.moveEntity(target, this);
-//                this.target = this.bfsDiagonalWithPath(mapWorld, Grass.class);
-//                this.HealthIncrease(this.аttackPower);
-//            } else {
-//                target.getPath().poll();
-//                mapWorld.moveEntity(target.getPath().poll(), this);
-//            }
-        }
         this.healthDecrease(INITIAL_HUNGER);
-    }
+        }
 
     public Cell getTarget() {
         return target;

@@ -29,7 +29,6 @@ public class Render {
 
 // двумерный массив сделать туда добавлять по методам потом выводить его
             String renderMapWorld = "";
-            renderMapWorld += ("Cимуляция " +sim.getMoveCount() +"\n");
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < length; j++) {
                     Entity entity = mapWorld.getEntity(new Cell(i, j));
