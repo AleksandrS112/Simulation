@@ -1,6 +1,6 @@
 package entity.motionoless;
 
-import MapWorld.MapWorld;
+import mapWorld.MapWorld;
 
 public class Rock extends Motionless {
 

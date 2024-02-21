@@ -1,8 +1,7 @@
 package entity.creature;
 
-import MapWorld.MapWorld;
-import MapWorld.Cell;
-import entity.motionoless.Grass;
+import mapWorld.MapWorld;
+import mapWorld.Cell;
 
 public class Predator extends Creature {
 
@@ -28,10 +27,12 @@ public class Predator extends Creature {
                 if ((Math.abs(target.getY()-this.getY()) <= this.getAttackRange()) && (Math.abs(target.getX()-this.getX()) <= this.getAttackRange())) {
                     this.healthIncrease(((Herbivore) mapWorld.getEntity(target)).healthDecrease(this.аttackPower));
                 } else {
+                    Cell moveCell = target.getPath().poll();
                     for(int motion = 0; motion < this.getSpeed() ; motion++) {
-                        target.getPath().poll();
-                        mapWorld.moveEntity(target.getPath().poll(), this);
+                        if (target.getPath().size() > 1)
+                            moveCell = target.getPath().poll();
                     }
+                    mapWorld.moveEntity(moveCell, this);
                 }
             }
         this.healthDecrease(INITIAL_HUNGER);

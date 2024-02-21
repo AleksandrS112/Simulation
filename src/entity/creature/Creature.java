@@ -1,10 +1,8 @@
 package entity.creature;
 
-import MapWorld.MapWorld;
+import mapWorld.MapWorld;
 import entity.Entity;
-import entity.motionoless.Grass;
-import MapWorld.Cell;
-
+import mapWorld.Cell;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -24,13 +22,15 @@ public abstract class Creature extends Entity {
 
     public abstract void makeMove();
 
-    public void healthIncrease(int increaseHealth) {
+    public int healthIncrease(int increaseHealth) {
         int oldHP = this.getHealthPoints();
         int newHP = oldHP + increaseHealth;
         if (newHP > 100)
             newHP = 100;
+        int difHP = newHP - oldHP;
         this.healthPoints = newHP;
-        System.out.println(this.getImage() +"->" +oldHP +" + " +(newHP - oldHP) +" = [" +this.getHealthPoints() +"] HP");
+        System.out.println(this.getImage() +"-> " +oldHP +" + " +difHP +" = [" +this.getHealthPoints() +"] HP");
+        return difHP;
     }
 
     public int healthDecrease(int healthDecrease) {
@@ -40,11 +40,12 @@ public abstract class Creature extends Entity {
         if (newHP <= 0) {
             newHP = 0;
             this.healthPoints = 0;
-            mapWorld.deleteEntity(mapWorld.getCellEntity(this));
+            this.mapWorld.deleteEntity(mapWorld.getCellEntity(this));
         } else
             this.healthPoints = newHP;
         difHP = oldHP - newHP;
-        System.out.println(this.getImage() + "->" + oldHP + " - " + difHP + "(" +healthDecrease + ")" + " = [" + this.getHealthPoints() + "] HP");
+        System.out.print(this.getImage() + "-> " + oldHP + " - " + difHP + "(" +healthDecrease + ")" + " = [" + this.getHealthPoints() + "] HP");
+        System.out.println(newHP == 0 ? " ☠\uFE0F" : "");
         return difHP;
     }
 

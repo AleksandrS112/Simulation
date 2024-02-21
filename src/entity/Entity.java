@@ -1,6 +1,6 @@
 package entity;
 
-import MapWorld.MapWorld;
+import mapWorld.MapWorld;
 
 public abstract class Entity {
 

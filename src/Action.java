@@ -1,25 +1,14 @@
-import MapWorld.MapWorld;
-import entity.Entity;
+import mapWorld.MapWorld;
 import entity.creature.Creature;
 import entity.creature.Herbivore;
-import MapWorld.Cell;
+import mapWorld.Cell;
 import entity.creature.Predator;
 import entity.motionoless.Grass;
 import entity.motionoless.Rock;
 import entity.motionoless.Tree;
+
 import java.util.List;
 import java.util.stream.Collectors;
-
-/**
- *  Action - действие, совершаемое над миром. Например - сходить всеми существами.
- *  Это действие итерировало бы существ и вызывало каждому makeMove().
- *  Каждое действие описывается отдельным классом и совершает операции над картой.
- *
- *  Симуляция содержит 2 массива действий:
- *   - initActions - действия, совершаемые перед стартом симуляции. Пример - расставить объекты и существ на карте
- *   - turnActions - действия, совершаемые каждый ход. Примеры - передвижение существ, добавить травы или травоядных,
- *     если их осталось слишком мало
- */
 
 public class Action {
 
@@ -45,12 +34,14 @@ public class Action {
         //   - сортировка по классу перед makeMove() для того, чтобы сначала сходили травоядные потому
         //     что они двигаются и будет некорректный рендер, из-за того, что рендер будет только после
         //     того как сходят все
-        for (Creature creature : sim.getMapWorld().getListCreature().stream()
+        List<Creature> listCreature = sim.getMapWorld().getListCreature().stream()
                 .sorted((o1, o2) -> {
-                    if (o1.getClass() == Herbivore.class)
-                        return -1;
+                    if (o1.getClass() == Predator.class)
+                        return 1;
                     else
-                        return 1;} ).collect(Collectors.toList())) {
+                        return -1;})
+                .collect(Collectors.toList());
+        for (Creature creature : listCreature) {
             if (sim.getMapWorld().isTheEntityOnTheMap(creature)) {
                 creature.makeMove();
             }

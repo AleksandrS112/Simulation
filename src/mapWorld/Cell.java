@@ -1,6 +1,8 @@
-package MapWorld;
+package mapWorld;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class Cell {
 

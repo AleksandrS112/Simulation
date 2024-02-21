@@ -1,14 +1,8 @@
 package entity.creature;
 
-import MapWorld.MapWorld;
+import mapWorld.MapWorld;
 import entity.motionoless.Grass;
-import MapWorld.Cell;
-
-/**
- * Класс "Травоядное", наследуется от Существа. Стремятся найти ресурс (траву),
- * может потратить свой ход на движение в сторону травы, либо на её поглощение.
- */
-
+import mapWorld.Cell;
 
 public class Herbivore extends Creature {
 
@@ -36,12 +30,15 @@ public class Herbivore extends Creature {
                     this.healthIncrease(RESTORE_HEALTH);
                     this.target = null;
                 } else {
-                    target.getPath().poll();
-                    mapWorld.moveEntity(target.getPath().poll(), this);
+                    Cell moveCell = target.getPath().poll();
+                    for(int motion = 0; motion < this.getSpeed() ; motion++) {
+                        if (this.target.getPath().size() > 1)
+                            moveCell = target.getPath().poll();
+                    }
+                    mapWorld.moveEntity(moveCell, this);
                 }
             }
             this.healthDecrease(INITIAL_HUNGER);
     }
-
 
 }

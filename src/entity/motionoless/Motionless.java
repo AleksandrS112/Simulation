@@ -1,6 +1,6 @@
 package entity.motionoless;
 
-import MapWorld.MapWorld;
+import mapWorld.MapWorld;
 import entity.Entity;
 
 public abstract class Motionless extends Entity {

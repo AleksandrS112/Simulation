@@ -1,10 +1,9 @@
-import MapWorld.Cell;
-import MapWorld.MapWorld;
+import mapWorld.Cell;
+import mapWorld.MapWorld;
 import entity.Entity;
 import entity.creature.Herbivore;
 import entity.creature.Predator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Render {

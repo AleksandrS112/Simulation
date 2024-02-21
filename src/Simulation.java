@@ -1,19 +1,4 @@
-import MapWorld.MapWorld;
-
-/**
- * Главный класс приложения, включает в себя:
- *     Карту
- *     Счётчик ходов
- *     Рендерер поля
- *     Actions - список действий, исполняемых перед стартом симуляции или на каждом ходу (детали ниже)
- *
- * Методы:
- *     nextTurn() - просимулировать и отрендерить один ход
- *     startSimulation() - запустить бесконечный цикл симуляции и рендеринга
- *     pauseSimulation() - приостановить бесконечный цикл симуляции и рендеринга
-*/
-
-
+import mapWorld.MapWorld;
 
 public class Simulation {
 
@@ -40,7 +25,7 @@ public class Simulation {
         }
 
         public void nextTurn() {
-                System.out.println("___Симуляция №" +this.moveCount);
+                System.out.println("___Симуляция №" +this.moveCount +"___");
                 Action.initAndSpawnActions(this);
                 Action.turnActions(this);
                 moveCount++;
