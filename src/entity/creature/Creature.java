@@ -1,5 +1,6 @@
 package entity.creature;
 
+import entity.motionoless.Death;
 import mapWorld.MapWorld;
 import entity.Entity;
 import mapWorld.Cell;
@@ -11,6 +12,7 @@ public abstract class Creature extends Entity {
     private int speed;
     private int hunger;
     private int attackRange;
+    protected Cell target;
 
     Creature(MapWorld mapWorld, String image, int healthPoints, int speed, int hunger, int attackRange) {
         super(mapWorld, image);
@@ -21,6 +23,15 @@ public abstract class Creature extends Entity {
     }
 
     public abstract void makeMove();
+
+    public void motion() {
+        Cell motionCell = target.getPath().poll();
+        for(int motionCount = 0; motionCount < this.getSpeed() ; motionCount++) {
+            if (this.target.getPath().size() > 1)
+                motionCell = target.getPath().poll();
+        }
+        mapWorld.moveEntity(motionCell, this);
+    }
 
     public int healthIncrease(int increaseHealth) {
         int oldHP = this.getHealthPoints();
@@ -40,7 +51,7 @@ public abstract class Creature extends Entity {
         if (newHP <= 0) {
             newHP = 0;
             this.healthPoints = 0;
-            this.mapWorld.deleteEntity(mapWorld.getCellEntity(this));
+            this.mapWorld.addEntity(mapWorld.getCellEntity(this), new Death(this.mapWorld));
         } else
             this.healthPoints = newHP;
         difHP = oldHP - newHP;
@@ -92,6 +103,10 @@ public abstract class Creature extends Entity {
             }
         }
         return null;
+    }
+
+    public Cell getTarget() {
+        return target;
     }
 
     public int getHealthPoints() {

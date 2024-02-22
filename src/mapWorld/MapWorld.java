@@ -2,6 +2,8 @@ package mapWorld;
 
 import entity.Entity;
 import entity.creature.Creature;
+import entity.motionoless.Death;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
@@ -65,6 +67,13 @@ public class MapWorld {
                 .map(e -> e.getKey())
                 .findFirst()
                 .get();
+    }
+
+    public void deletedEntityClass(Class classEntity) {
+        this.getListEntity().stream()
+                .filter(e -> e instanceof Death)
+                .map(e -> this.getCellEntity(e))
+                .forEach(e -> this.deleteEntity(e));
     }
 
     public int getHeight() {

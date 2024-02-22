@@ -11,39 +11,41 @@ public class Render {
             MapWorld mapWorld = sim.getMapWorld();
             int height = mapWorld.getHeight();
             int length = mapWorld.getLength();
-
-            List<Cell> listRed = mapWorld.getListCreature().stream()
+            List<Cell> listPredatorTarget = mapWorld.getListCreature().stream()
                     .filter(c -> c instanceof Predator)
                     .map(h -> (Predator) h)
                     .filter(p -> p.getTarget() != null)
                     .flatMap(p -> p.getTarget().getPath().stream())
                     .toList();
-
-            List<Cell> listGreen = mapWorld.getListCreature().stream()
+            List<Cell> listHerbivoreTarget = mapWorld.getListCreature().stream()
                     .filter(c -> c instanceof Herbivore)
                     .map(h -> (Herbivore) h)
                     .filter(h -> h.getTarget() != null)
                     .flatMap(e -> e.getTarget().getPath().stream())
                     .toList();
-
-// двумерный массив сделать туда добавлять по методам потом выводить его
-            String renderMapWorld = "";
+            String[][] renderMapWorld = new String[height][length];
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < length; j++) {
                     Entity entity = mapWorld.getEntity(new Cell(i, j));
                     if (entity != null) {
-                        renderMapWorld += entity.getImage();
-                    } else if (listRed.contains(new Cell(i,j))) {
-                        renderMapWorld += "\uD83D\uDD34";
-                    } else if (listGreen.contains(new Cell(i,j))) {
-                        renderMapWorld += "\uD83D\uDFE9";
+                        renderMapWorld[i][j] = entity.getImage();
+                    } else if (listPredatorTarget.contains(new Cell(i,j))) {
+                        renderMapWorld[i][j] = "\uD83D\uDD34";
+                    } else if (listHerbivoreTarget.contains(new Cell(i,j))) {
+                        renderMapWorld[i][j] = "\uD83D\uDFE9";
                     } else {
-                        renderMapWorld += "⬜";
+                        renderMapWorld[i][j] = "⬜";
                     }
                 }
-                renderMapWorld += "\n";
             }
-            return renderMapWorld;
+            String resultRender = "";
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < length; j++) {
+                    resultRender += renderMapWorld[i][j];
+                }
+                resultRender += "\n";
+            }
+            return resultRender;
         }
 
 }

@@ -14,7 +14,6 @@ public class Simulation {
                 moveCount = 1;
         }
 
-
         public Simulation(int heightMapWorld, int lengthMapWorld,
                           int quantityHerbivore, int quantityPredator,
                           int quantityGrass,
@@ -29,7 +28,7 @@ public class Simulation {
         }
 
         public void nextTurn() {
-                System.out.println("___Симуляция №" +this.moveCount +"___");
+                System.out.println("___Симуляция №" +this.getMoveCount() +"___");
                 Action.initAndSpawnActions(this);
                 Action.turnActions(this);
                 moveCount++;

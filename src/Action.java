@@ -1,3 +1,4 @@
+import entity.motionoless.Death;
 import mapWorld.MapWorld;
 import entity.creature.Creature;
 import entity.creature.Herbivore;
@@ -15,6 +16,7 @@ public class Action {
     public static void initAndSpawnActions(Simulation sim) {
         // если количество конкретных Entity на карте меньше чем должно быть спавнит до необходимого
         MapWorld mapWorld = sim.getMapWorld();
+        mapWorld.deletedEntityClass(Death.class); // удаляет черепки если на прошлом ходу кто-то умер
         for (int i = mapWorld.countEntityClass(Herbivore.class) ; i<sim.getQuantityHerbivore(); i++)
             mapWorld.addEntity(Cell.findEmptyCell(mapWorld), new Herbivore(mapWorld));
         for (int i = mapWorld.countEntityClass(Predator.class); i<sim.getQuantityPredator(); i++)
@@ -34,18 +36,12 @@ public class Action {
         //   - сортировка по классу перед makeMove() для того, чтобы сначала сходили травоядные потому
         //     что они двигаются и будет некорректный рендер, из-за того, что рендер будет только после
         //     того как сходят все
-        List<Creature> listCreature = sim.getMapWorld().getListCreature().stream()
-                .sorted((o1, o2) -> {
-                    if (o1.getClass() == Predator.class)
-                        return 1;
-                    else
-                        return -1;})
+        List<Creature> listCreature = sim.getMapWorld().getListCreature().stream( )
+                .sorted((o1, o2) -> {return o1.getClass() == Predator.class ? 1 : -1;})
                 .collect(Collectors.toList());
-        for (Creature creature : listCreature) {
-            if (sim.getMapWorld().isTheEntityOnTheMap(creature)) {
+        for (Creature creature : listCreature)
+            if (sim.getMapWorld().isTheEntityOnTheMap(creature))
                 creature.makeMove();
-            }
-        }
     }
 
 }
