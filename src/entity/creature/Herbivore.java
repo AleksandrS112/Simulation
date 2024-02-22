@@ -29,7 +29,7 @@ public class Herbivore extends Creature {
                     mapWorld.moveEntity(target, this);
                     this.healthIncrease(RESTORE_HEALTH);
                     this.target = null;
-                } else {
+                } else {  // !!!!!!!!!!!!!!!!!!!!перенести эту часть в общий класс
                     Cell moveCell = target.getPath().poll();
                     for(int motion = 0; motion < this.getSpeed() ; motion++) {
                         if (this.target.getPath().size() > 1)
