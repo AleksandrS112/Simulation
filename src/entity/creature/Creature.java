@@ -8,11 +8,18 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public abstract class Creature extends Entity {
+    private static final int MAX_HEALTH;
+    private static final int MIN_HEALTH;
     private int healthPoints;
     private int speed;
     private int hunger;
     private int attackRange;
     protected Cell target;
+
+    static {
+        MAX_HEALTH = 100;
+        MIN_HEALTH = 0;
+    }
 
     Creature(MapWorld mapWorld, String image, int healthPoints, int speed, int hunger, int attackRange) {
         super(mapWorld, image);
@@ -36,8 +43,8 @@ public abstract class Creature extends Entity {
     public int healthIncrease(int increaseHealth) {
         int oldHP = this.getHealthPoints();
         int newHP = oldHP + increaseHealth;
-        if (newHP > 100)
-            newHP = 100;
+        if (newHP > Creature.MAX_HEALTH)
+            newHP = Creature.MAX_HEALTH;
         int difHP = newHP - oldHP;
         this.healthPoints = newHP;
         System.out.println(this.getImage() +" " +oldHP +" + " +difHP + "(" +increaseHealth + ")" +" = [" +this.getHealthPoints() +"] HP");
@@ -48,9 +55,9 @@ public abstract class Creature extends Entity {
         int oldHP = this.getHealthPoints();
         int newHP = oldHP - healthDecrease;
         int difHP = 0;
-        if (newHP <= 0) {
-            newHP = 0;
-            this.healthPoints = 0;
+        if (newHP <= Creature.MIN_HEALTH) {
+            newHP = Creature.MIN_HEALTH;
+            this.healthPoints = Creature.MIN_HEALTH;
             this.mapWorld.addEntity(mapWorld.getCellEntity(this), new Death(this.mapWorld));
         } else
             this.healthPoints = newHP;
